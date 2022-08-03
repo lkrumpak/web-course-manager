@@ -1,0 +1,81 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+    
+      match /practicals/{docId} {
+      	allow read;
+      }
+      
+      match /users/{docId} {
+        allow create: if isValidLogin();
+        allow read:   if isSignedIn();
+        allow update: if isAdmin() || isOwner(docId)
+        allow delete: if isAdmin();
+      }
+      match /queues/{docId=*} {
+        allow create,read,update,delete: if true;
+        match /queue/{docId} {
+          allow create,read,update,delete: if true;
+        }
+      }
+      
+      match /courses/{courseId} {
+        allow create: if isAdmin();
+        allow read:   if true;
+        allow update: if isAdmin() || request.auth.uid in resource.data.coordinators;
+        allow delete: if isAdmin() || request.auth.uid in resource.data.coordinators;
+        
+        match /practicals/{docId} {
+          allow create: if isCourseTeacher(courseId)
+          allow read:   if isMemberOf(courseId);
+          allow update: if isCourseTeacher(courseId)
+          allow delete: if isCourseTeacher(courseId) || isAdmin()
+        }
+      }
+      
+      function isOwner(userId){
+        return request.auth.uid == userId
+      }
+
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function isAdmin() {
+        return isSignedIn()
+                && (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true)
+      }
+
+      function isValidLogin(){
+        let isNow = request.time == request.resource.data.createdAt;
+        let isValidName = request.resource.data.displayName.size() > 2;
+        let isStudentId = request.resource.data.studentId.size() == 7;
+        let isAdminFalse = request.resource.data.admin == false;
+        return isSignedIn() && isNow && isValidName && isAdminFalse && isStudentId ;
+    	}
+      
+      function isCourseTeacher(courseId){
+      	let courseData = get(/databases/$(database)/documents/courses/$(courseId)).data ;
+        
+      	return isAdmin() ||
+        (request.auth.uid in courseData.coordinators) || 
+        (request.auth.uid in courseData.teachers);
+      }
+      
+      function isMemberOf(courseId){
+      	let courseData = get(/databases/$(database)/documents/courses/$(courseId)).data ;
+        
+      	return (request.auth.uid in courseData.coordinators) || 
+        (courseData.published == true && (request.auth.uid in courseData.students)) || 
+        (request.auth.uid in courseData.teachers);
+      }
+      
+      function isCourseParticipant(){
+      	return (request.auth.uid in resource.data.coordinators) || 
+        (resource.data.published == true && (request.auth.uid in resource.data.students)) || 
+        (request.auth.uid in resource.data.teachers);
+			}
+    }
+  }
+}

@@ -1,0 +1,105 @@
+.timetable {
+  background-color: whitesmoke;
+  width: 100%;
+}
+
+.header {
+  text-transform: uppercase;
+  padding:10px 40px;
+}
+
+.monthheader {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+}
+
+.monthtext {
+  width: 140px;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  display: inline-block;
+}
+
+.monthitem{
+  padding: 10px;
+  display: inline-block;
+}
+
+.arrowRight {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  cursor: pointer;
+}
+
+.arrowLeft {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  cursor: pointer;
+}
+
+.weekheader {
+  width: 100%;
+  text-align:justify; 
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  display: flex;
+}
+
+.weekitem {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  flex: 1;
+  font-size: 18px;
+  line-height: 52px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekhighlight {
+  font-weight: bold;
+}
+
+.dayitem {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 52px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #2bb899;
+  color: black !important;
+}
+
+.card {
+  padding: 5px;
+  border-left: solid 3px #2bb899;
+  margin: 5px 0;
+}
+.time {
+  color: #2bb899;;
+}
+
+.available {
+  color: #2bb899;
+}

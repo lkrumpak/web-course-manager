@@ -1,0 +1,29 @@
+.card{
+  width: 50%;
+  height: auto;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: 5% 25%;
+  background-color: #273444  ;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 30px 40px 0 rgba(73, 79, 90, 0.5);
+
+}
+.card h3, .card p{
+  color: white;
+}
+.card h3 strong,.card h2 {
+  color: #1abc9c;
+}
+.statusFalse {
+  color: red;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.statusTrue {
+  color: green;
+  text-transform: uppercase;
+  font-weight: bold;
+}

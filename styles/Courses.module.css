@@ -1,0 +1,50 @@
+.popup{
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  z-index: 4;
+  background-color: rgba(232, 236, 241, 0.7);
+}
+
+.form {
+  width: 80%;
+  height: auto;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: 5% 10%;
+  background-color: #273444 ;
+  border-radius: 5px;
+  padding: 20px;
+  color: white;
+}
+
+.input100 {
+  outline: none;
+  border: none;
+}
+
+.auth-form{
+  margin: auto;
+  width: 400px;
+}
+
+.formInput{
+  border-radius: 3px;
+  margin-bottom: 16px;
+}
+
+
+.btnCreate {
+  background-color: #1abc9c;
+ 
+}
+
+.btnClose {
+  background-color: rgb(241, 100, 100);
+}
+.radio {
+  background-color: red;
+}
